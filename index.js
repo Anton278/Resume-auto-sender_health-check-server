@@ -19,7 +19,7 @@ async function checkHealth() {
   } catch (err) {
     await telegramBot.api.sendMessage(
       process.env.TELEGRAM_ID,
-      "Server has crashed"
+      "‼️ Server has crashed"
     );
   }
 }
