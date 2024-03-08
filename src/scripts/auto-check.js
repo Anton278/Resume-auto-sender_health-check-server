@@ -1,18 +1,15 @@
 import "dotenv/config";
 import { Bot } from "grammy";
+import fs from "node:fs";
 
-import { api } from "./src/http/api.js";
+import healthService from "../services/health.js";
 
 const telegramBot = new Bot(process.env.TELEGRAM_BOT_KEY);
 
-async function getHealth() {
-  const res = await api.get("/health");
-  return res.data;
-}
-
 async function checkHealth() {
   try {
-    const health = await getHealth();
+    const health = await healthService.get();
+
     if (health.dbConnected === 0) {
       throw new Error("");
     }
@@ -21,6 +18,8 @@ async function checkHealth() {
       process.env.TELEGRAM_ID,
       "‼️ Server has crashed"
     );
+
+    fs.appendFileSync("auto-check-log.txt", err + "\n");
   }
 }
 
