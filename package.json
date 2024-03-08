@@ -6,6 +6,10 @@
   "type": "module",
   "author": "",
   "license": "MIT",
+  "scripts": {
+    "start:manual": "node ./src/scripts/manual-check.js",
+    "start:auto": "node ./src/scripts/auto-check.js"
+  },
   "dependencies": {
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
